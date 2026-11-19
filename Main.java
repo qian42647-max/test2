@@ -1,13 +1,30 @@
-//TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
-// 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
-void main() {
-    //TIP 当文本光标位于高亮显示的文本处时按 <shortcut actionId="ShowIntentionActions"/>
-    // 查看 IntelliJ IDEA 建议如何修正。
-    IO.println(String.format("Hello and welcome!"));
+public final class Main {
+    private static final int DEFAULT_REPEAT_COUNT = 5;
+    private static final int MAX_REPEAT_COUNT = 100;
 
-    for (int i = 1; i <= 5; i++) {
-        //TIP 按 <shortcut actionId="Debug"/> 开始调试代码。我们已经设置了一个 <icon src="AllIcons.Debugger.Db_set_breakpoint"/> 断点
-        // 但您始终可以通过按 <shortcut actionId="ToggleLineBreakpoint"/> 添加更多断点。
-        IO.println("i = " + i);
+    private Main() {
+    }
+
+    public static void main(String[] args) {
+        String name = args.length > 0 && !args[0].isBlank() ? args[0] : "World";
+        int repeatCount = args.length > 1 ? parseRepeatCount(args[1]) : DEFAULT_REPEAT_COUNT;
+
+        System.out.printf("Hello, %s!%n", name);
+        for (int i = 1; i <= repeatCount; i++) {
+            System.out.printf("Count: %d/%d%n", i, repeatCount);
+        }
+    }
+
+    private static int parseRepeatCount(String value) {
+        try {
+            int count = Integer.parseInt(value);
+            if (count < 1 || count > MAX_REPEAT_COUNT) {
+                throw new IllegalArgumentException(
+                        "Repeat count must be between 1 and " + MAX_REPEAT_COUNT);
+            }
+            return count;
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("Repeat count must be an integer: " + value, exception);
+        }
     }
 }
