@@ -6,13 +6,18 @@ public final class Main {
     }
 
     public static void main(String[] args) {
-        String name = args.length > 0 && !args[0].isBlank() ? args[0] : "World";
+        String name = args.length > 0 && !args[0].isBlank() ? normalizeName(args[0]) : "World";
         int repeatCount = args.length > 1 ? parseRepeatCount(args[1]) : DEFAULT_REPEAT_COUNT;
 
         System.out.printf("Hello, %s!%n", name);
         for (int i = 1; i <= repeatCount; i++) {
             System.out.printf("Count: %d/%d%n", i, repeatCount);
         }
+    }
+
+    private static String normalizeName(String value) {
+        String trimmed = value.trim();
+        return trimmed.substring(0, 1).toUpperCase() + trimmed.substring(1);
     }
 
     private static int parseRepeatCount(String value) {

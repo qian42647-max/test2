@@ -11,8 +11,9 @@ javac Main.java
 java Main [name] [repeat-count]
 ```
 
-Both arguments are optional. The name defaults to `World`, and the repeat count
-defaults to `5`. The repeat count must be an integer between 1 and 100.
+Both arguments are optional. The name defaults to `World`, and is automatically
+capitalized (first letter uppercased). The repeat count defaults to `5` and must
+be an integer between 1 and 100.
 
 Example:
 
